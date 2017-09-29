@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<style>
+#yiyan {
+	width: 100%;
+	max-width: 400px;
+	margin: 0px auto;
+	text-align: center;
+	background-color: #fff;
+	padding-top: 0px;
+	padding-bottom: 15px;
+
+}
+</style>
+
+<div id="yiyan" style="
+width: 300px;
+background-color:rgba(255, 255, 255, 0.8);
+">
+<br />
+<br />
+<br />
+<script src="cfg.js"></script>
+<script>
+document.body.style.background='url("'+set.background+'")'
+
+function upd(){
+var num=Math.random();
+if(num>=0.6){
+var url=set.apis[Math.floor(Math.random() * set.apis.length + 1)-1]
+var ajax = new XMLHttpRequest();
+ajax.onreadystatechange=function()
+  {
+  if (ajax.readyState==4 && ajax.status==200)
+    {
+   var hit = JSON.parse(ajax.responseText);
+    document.getElementById("yiyan").innerHTML="<br />"+hit.text+"<br> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp——"+hit.source;
+    }
+  }
+ajax.open('GET',url, true);
+ajax.send();
+}
+
+}
+window.setInterval("upd()", set.timeout); 
+upd()
+</script>
+<br>
+</div>
